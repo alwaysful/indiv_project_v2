@@ -9,18 +9,18 @@ import {
   Post,
   UseGuards,
 } from '@nestjs/common';
-import type { AuthUser } from '../login/auth.types';
 import { CurrentUser } from '../login/current-user.decorator';
 import { JwtAuthGuard } from '../login/jwt.guard';
 import { CreatePostDto } from './dto/createpost.dto';
 import { UpdatePostDto } from './dto/updatepost.dto';
 import { PostService } from './post.service';
-
+interface AuthUser {
+  id: number;
+  email: string;
+}
 @Controller('posts')
 export class PostController {
   constructor(private readonly postService: PostService) {}
-
-  // 조회(목록/단건)는 누구나, 작성/수정/삭제는 로그인 필요
 
   @UseGuards(JwtAuthGuard)
   @Post()
