@@ -1,12 +1,12 @@
 import { Injectable } from '@nestjs/common';
-import { Prisma, User } from '@prisma/client';
+import { Prisma, User } from '../../generated/prisma/client';
 import { PrismaService } from '../../prisma/prisma.service';
 
 @Injectable()
 export class AuthRepository {
   constructor(private prisma: PrismaService) {}
 
-  findByEmail(email: string): Promise<User | null> {
+  findByEmail(email: string): Promise<User> {
     return this.prisma.user.findUnique({ where: { email } });
   }
 

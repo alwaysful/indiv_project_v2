@@ -1,14 +1,12 @@
-import { User } from "@prisma/client";
+import { User } from '../../../generated/prisma/client';
 
 // password, sub 등 민감 필드는 의도적으로 제외
 export class UserResponseDto {
-  id!: string;
+  id!: number;
 
   email!: string;
 
   username!: string | null;
-
-  provider!: string | null;
 
   createdAt!: Date;
 
@@ -17,7 +15,6 @@ export class UserResponseDto {
     dto.id = user.id;
     dto.email = user.email;
     dto.username = user.username;
-    dto.provider = user.provider;
     dto.createdAt = user.createdAt;
     return dto;
   }
