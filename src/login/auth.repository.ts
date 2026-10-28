@@ -10,11 +10,6 @@ export class AuthRepository {
     return this.prisma.user.findUnique({ where: { email } });
   }
 
-  // OAuth 계정 조회 (provider + sub)
-  findByProvider(provider: string, sub: string): Promise<User | null> {
-    return this.prisma.user.findFirst({ where: { provider, sub } });
-  }
-
   create(data: Prisma.UserCreateInput): Promise<User> {
     return this.prisma.user.create({ data });
   }
