@@ -1,19 +1,23 @@
 import { Controller, Post, Body, HttpCode, HttpStatus } from '@nestjs/common';
+import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { AuthService } from './auth.service';
 import { CreateUserDto } from './dto/signup.dto';
 import { LoginDto } from './dto/login.dto';
 import { TokenResponseDto } from './dto/token-response.dto';
 import { UserResponseDto } from './dto/user-response.dto';
 
+@ApiTags('auth')
 @Controller('auth')
 export class AuthController {
   constructor(private auth: AuthService) {}
 
+  @ApiOperation({ summary: '회원가입' })
   @Post('signup')
   signup(@Body() body: CreateUserDto): Promise<UserResponseDto> {
     return this.auth.signup(body.email, body.password, body.username);
   }
 
+  @ApiOperation({ summary: '로그인 (JWT accessToken 발급)' })
   @Post('login')
   @HttpCode(HttpStatus.OK)
   login(@Body() body: LoginDto): Promise<TokenResponseDto> {

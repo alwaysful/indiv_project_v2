@@ -2,6 +2,7 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { Logger, ValidationPipe } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
+import { setupSwagger } from './swagger';
 
 async function bootstrap(): Promise<void> {
   const app = await NestFactory.create(AppModule);
@@ -14,6 +15,11 @@ async function bootstrap(): Promise<void> {
       transform: true,
     }),
   );
+
+  // Swagger (운영 환경에서는 비활성화)
+  if (configService.get<string>('NODE_ENV') !== 'production') {
+    setupSwagger(app);
+  }
 
   await app.listen(configService.getOrThrow<number>('PORT'));
 }
