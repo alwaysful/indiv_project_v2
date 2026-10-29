@@ -6,7 +6,7 @@ import { PrismaService } from '../../prisma/prisma.service';
 export class AuthRepository {
   constructor(private prisma: PrismaService) {}
 
-  findByEmail(email: string): Promise<User> {
+  findByEmail(email: string): Promise<User | null> {
     return this.prisma.user.findUnique({ where: { email } });
   }
 
