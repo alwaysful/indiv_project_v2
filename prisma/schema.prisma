@@ -21,6 +21,8 @@ model User {
   email     String   @unique
   username  String?
   password  String
+  // 리프레시 토큰 SHA-256 해시 (원문 저장 금지). null 이면 로그아웃/미발급 상태
+  refreshTokenHash String?
   posts     Post[]
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

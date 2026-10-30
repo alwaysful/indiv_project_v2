@@ -7,7 +7,9 @@ export const SWAGGER_PATH = 'docs';
 export function setupSwagger(app: INestApplication): void {
   const config = new DocumentBuilder()
     .setTitle('Indiv Project API')
-    .setDescription('회원가입/로그인(JWT) 및 게시글 CRUD API 문서')
+    .setDescription(
+      '회원가입/로그인(JWT access + refresh 토큰) 및 게시글 CRUD API 문서',
+    )
     .setVersion('1.0')
     // @ApiBearerAuth() 가 붙은 엔드포인트에 Authorize 버튼으로 JWT 입력
     .addBearerAuth()
